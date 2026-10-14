@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.1ternal.wsi",
+  "name": "Workspace Shape Indicator",
+  "version": "1.0.0",
+  "author": "1ternal",
+  "license": "MIT",
+  "description": "Minimal workspace indicator drawn as clean native vector shapes: dots, squares, diamonds, or bars.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Workspaces.qml"
+  },
+  "barWidget": {
+    "displayName": "Workspace Shape Indicator",
+    "description": "Minimal workspace indicator drawn as clean native vector shapes: dots, squares, diamonds, or bars.",
+    "category": "Compositor",
+    "allowMultiple": false,
+    "defaultSection": "left",
+    "defaults": {
+      "mode": "dots",
+      "colorScheme": "theme",
+      "density": "normal",
+      "workspaces": 5,
+      "hideEmpty": false,
+      "scroll": true
+    },
+    "schema": [
+      {
+        "key": "mode",
+        "type": "enum",
+        "label": "Shape",
+        "options": [
+          "dots",
+          "square",
+          "diamond",
+          "bar"
+        ],
+        "defaultValue": "dots",
+        "description": "dots: circle. square: cube. diamond: rhombus. bar: horizontal pill."
+      },
+      {
+        "key": "colorScheme",
+        "type": "enum",
+        "label": "Color scheme",
+        "options": [
+          "theme",
+          "monotone"
+        ],
+        "defaultValue": "theme",
+        "description": "theme: follows bar foreground palette. monotone: pure neutral black-and-white grayscale."
+      },
+      {
+        "key": "density",
+        "type": "enum",
+        "label": "Density",
+        "options": [
+          "compact",
+          "normal",
+          "relaxed"
+        ],
+        "defaultValue": "normal",
+        "description": "Slot width and padding: compact, normal, or relaxed."
+      },
+      {
+        "key": "workspaces",
+        "type": "integer",
+        "label": "Base workspaces",
+        "min": 1,
+        "max": 10,
+        "defaultValue": 5,
+        "description": "Minimum workspace slots 1..N, always shown (ignored when hideEmpty is true). Grows contiguously to the highest workspace in use, so a slot's position always equals its workspace number."
+      },
+      {
+        "key": "hideEmpty",
+        "type": "boolean",
+        "label": "Hide empty",
+        "defaultValue": false,
+        "description": "Hide unoccupied workspaces. When true, shrink to occupied workspaces plus the focused one, so bar width changes as windows open and close. Default false keeps the base 1..N slots shown with stable mouse-click targets; it still grows when a higher workspace is used."
+      },
+      {
+        "key": "dim",
+        "type": "number",
+        "label": "Occupied idle opacity",
+        "min": 0.2,
+        "max": 0.9,
+        "step": 0.05,
+        "description": "Opacity of idle workspaces with windows (empty workspaces dim further). Unset follows the system Style.normalBorderAlpha token; any explicit value pins, even one equal to a theme default. To unpin, delete the key from shell.json or run: omarchy bar set io.github.1ternal.wsi dim null --json."
+      },
+      {
+        "key": "scroll",
+        "type": "boolean",
+        "label": "Scroll to switch",
+        "defaultValue": true,
+        "description": "Wheel over the widget moves between workspaces."
+      }
+    ]
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.workspaces"
+  }
+}
